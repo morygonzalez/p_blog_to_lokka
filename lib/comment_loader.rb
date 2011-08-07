@@ -23,7 +23,7 @@ DataMapper::Model.raise_on_save_failure = true
 
 class CommentInsertion
   def load_comments
-    YAML.load_file("#{Dir.pwd}/p_forum.yml")
+    YAML.load_file("#{File.dirname(__FILE__)}/../src/p_forum.yml")
   end
 
   def set_comment_entry_id(refer_id)

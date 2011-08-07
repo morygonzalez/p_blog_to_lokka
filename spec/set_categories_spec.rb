@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #-*- coding: utf-8 -*-
 
-require File.dirname(__FILE__) + "/../db/migrator/set_categories"
+require File.dirname(__FILE__) + "/../set_categories"
 
 describe SetCategory, "SetCategory" do
   subject { SetCategory.new }

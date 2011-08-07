@@ -30,7 +30,7 @@ class EntryInsertion
   end
 
   def load_entries
-    YAML.load_file("#{Dir.pwd}/p_blog_log.yml")
+    YAML.load_file("#{File.dirname(__FILE__)}/p_blog_log.yml")
   end
 
   def insert_categories

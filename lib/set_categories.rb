@@ -22,7 +22,7 @@ DataMapper::Model.raise_on_save_failure = true
 
 class SetCategory
   def load_logs
-    YAML.load_file("#{Dir.pwd}/p_blog_log.yml")
+    YAML.load_file("#{File.dirname(__FILE__)}/p_blog_log.yml")
   end
 
   def list_categories
