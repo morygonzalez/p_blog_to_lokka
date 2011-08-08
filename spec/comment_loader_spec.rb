@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #-*- coding: utf-8 -*-
 
-require File.dirname(__FILE__) + "/../comment_loader"
+require File.dirname(__FILE__) + "/../lib/comment_loader"
 
 describe "Comment" do
   subject { subject = CommentInsertion.new }
