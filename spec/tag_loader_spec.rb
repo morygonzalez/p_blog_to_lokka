@@ -1,5 +1,6 @@
-# encoding: UTF-8
+#-*- coding: utf-8 -*-
 
+require File.dirname(__FILE__) + '/../../spec/spec_helper'
 require File.dirname(__FILE__) + '/../lib/tag_loader'
 
 describe TagLoader do
@@ -10,9 +11,7 @@ describe TagLoader do
       subject.load_yaml.should be_true
     end
 
-    it "タグ一覧を表示"
-      subject.list_tags.should be_kind_of(Array)
-    end
+    it { subject.list_tags.should be_kind_of(Array) }
   end
 
   it "tagsテーブルに取得したtagをそれぞれ保存する" do
