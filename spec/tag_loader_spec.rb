@@ -19,7 +19,7 @@ describe TagLoader do
       subject.list_tags[rand(subject.list_tags.size)].should_not match(/^\s.+/)
       subject.list_tags[rand(subject.list_tags.size)].should_not match(/.+\s$/)
     end
-    
+
     it "アルファベットは小文字になってる" do
       @target = subject.list_tags[rand(subject.list_tags.size)]
       @target.should match(/[a-z]+/) if @target =~ /[a-zA-Z]+/
@@ -27,16 +27,26 @@ describe TagLoader do
   end
 
   it "tagsテーブルに取得したtagをそれぞれ保存する" do
-    pending "やんごとなき理由"
+    pending
     subject.save_tags.should be_true
   end
 
-  it "タグのある記事とタグを関連づける" do
-    pending
+  context "タグのある記事とタグを関連づける" do
+    it "Entryはタグを持つ" do
+      Entry.new.tags.should be_true
+    end
+
+    it "Entryにtag_listを設定可能" do
+      Entry.new.tag_list.should be_true
+    end
+
+    it "個別エントリにタグを設定" do
+      subject.set_tag_to_entries.should be_true
+    end
   end
 
-  after(:all) do
-    Tag.all.destroy
-    Tag.repository.adapter.execute('update sqlite_sequence set seq=0 where name="tags";')
-  end
+  # after(:all) do
+  #   Tag.all.destroy
+  #   Tag.repository.adapter.execute('update sqlite_sequence set seq=0 where name="tags";')
+  # end
 end

@@ -4,6 +4,7 @@
 require "yaml"
 require "dm-core"
 require "dm-tags"
+require_relative "entry_loader"
 
 YAML::ENGINE.yamler= 'syck'
 
@@ -12,6 +13,10 @@ class Tags
 
   property :id, Serial
   property :name, String, :length => 255
+end
+
+class Entry
+  has_tags
 end
 
 DataMapper::Model.raise_on_save_failure = true
@@ -46,6 +51,15 @@ class TagLoader
       rescue DataMapper::SaveFailureError
         return tag["name"]
       end
+    end
+  end
+
+  def set_tag_to_entries
+    yaml = load_yaml
+    yaml.each do |y|
+      entry = Entry.first(:slug => y["id"])
+      entry.tag_list = y['tag']
+      entry.save
     end
   end
 end
