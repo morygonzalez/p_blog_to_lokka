@@ -58,7 +58,9 @@ class TagLoader
     yaml = load_yaml
     yaml.each do |y|
       entry = Entry.first(:slug => y["id"])
-      entry.tag_list = y['tag']
+      y['tag'].split(",").each do |t|
+        entry.tag_list << t.strip
+      end
       entry.save
     end
   end
