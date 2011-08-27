@@ -4,7 +4,7 @@
 require "yaml"
 require "dm-core"
 require "dm-tags"
-require_relative "entry_loader"
+require File.dirname(__FILE__) + "entry_loader"
 
 YAML::ENGINE.yamler= 'syck'
 
