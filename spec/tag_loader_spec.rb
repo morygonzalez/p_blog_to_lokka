@@ -36,7 +36,7 @@ describe TagLoader do
       Entry.new.tags.should be_true
     end
 
-    it "Entryにtag_listを設定可能" do
+    it "Entryにtag_listプロパティを持つ" do
       Entry.new.tag_list.should be_true
     end
 

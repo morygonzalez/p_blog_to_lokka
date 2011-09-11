@@ -4,23 +4,8 @@
 require "rubygems"
 require "yaml"
 require "dm-core"
+require File.dirname(__FILE__) + "/../../lib/lokka/entry"
 require File.dirname(__FILE__) + "/set_categories"
-
-class Entry
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :user_id, Integer
-  property :category_id, Integer
-  property :slug, String, :length => 255
-  property :title, String, :length => 255
-  property :body, Text
-  property :type, String
-  property :draft, Boolean, :default => false
-  property :created_at, DateTime
-  property :updated_at, DateTime
-  property :frozen_tag_list, String
-end
 
 DataMapper::Model.raise_on_save_failure = true
 
@@ -62,9 +47,10 @@ class EntryInsertion
           :body => entry["comment"],
           :type => "Post",
           :created_at => entry["date"],
-          :updated_at => entry["mod"],
-          :frozen_tag_list => entry["tag"]
+          :updated_at => entry["mod"]
+          # :frozen_tag_list => entry["tag"]
         )
+        @entry.tag_list = entry["tag"]
         @entry.save
       rescue DataMapper::SaveFailureError
         return entry["name"]

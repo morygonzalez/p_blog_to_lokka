@@ -4,7 +4,7 @@
 require "yaml"
 require "dm-core"
 require "dm-tags"
-require File.dirname(__FILE__) + "entry_loader"
+require File.dirname(__FILE__) + "/../../lib/lokka/entry"
 
 YAML::ENGINE.yamler= 'syck'
 
@@ -13,10 +13,6 @@ class Tags
 
   property :id, Serial
   property :name, String, :length => 255
-end
-
-class Entry
-  has_tags
 end
 
 DataMapper::Model.raise_on_save_failure = true
@@ -57,10 +53,9 @@ class TagLoader
   def set_tag_to_entries
     yaml = load_yaml
     yaml.each do |y|
-      entry = Entry.first(:slug => y["id"])
-      y['tag'].split(",").each do |t|
-        entry.tag_list << t.strip
-      end
+      entry = Entry.first(:slug => y["id"].to_s)
+      p y['tag']
+      entry.tag_list = y['tag'].to_s
       entry.save
     end
   end
